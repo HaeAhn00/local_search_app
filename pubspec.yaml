@@ -36,6 +36,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
   flutter_riverpod: ^2.6.1
+  dio: ^5.5.0+1 # API 통신을 위한 dio 패키지
 
 dev_dependencies:
   flutter_test:
