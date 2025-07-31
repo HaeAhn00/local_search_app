@@ -13,7 +13,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: HomePage(),
+      theme: ThemeData(
+        // 앱의 전반적인 색상(AppBar 등)을 설정합니다.
+        primarySwatch: Colors.blue,
+        // Scaffold의 기본 배경색을 앱 전체에 적용합니다.
+        scaffoldBackgroundColor: Colors.grey[100], // 연한 회색
+      ),
+      home: const HomePage(),
     );
   }
 }

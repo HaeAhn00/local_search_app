@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:local_search_app/ui/detail/detail_page.dart';
 
 class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
   @override
   State<HomePage> createState() => _HomePageState();
 }
@@ -86,12 +88,11 @@ class _HomePageState extends State<HomePage> {
             // 2. 각 아이템을 GestureDetector로 감싸 탭 이벤트를 추가합니다.
             return GestureDetector(
               onTap: () {
-                // 탭하면 BottomSheet를 표시합니다.
-                showModalBottomSheet(
-                  context: context,
-                  builder: (context) {
-                    return _LocationDetailBottomSheet(location: location);
-                  },
+                // 탭하면 DetailPage로 이동하고, 선택한 location 정보를 전달합니다.
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => DetailPage(location: location)),
                 );
               },
               child: Container(
@@ -116,90 +117,6 @@ class _HomePageState extends State<HomePage> {
             );
           },
         ),
-      ),
-    );
-  }
-}
-
-// BottomSheet의 UI를 담당하는 별도의 위젯입니다.
-class _LocationDetailBottomSheet extends StatelessWidget {
-  // 표시할 위치 정보를 전달받습니다.
-  final Map<String, String> location;
-
-  const _LocationDetailBottomSheet({required this.location});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      height: 300,
-      padding: const EdgeInsets.only(top: 20, right: 20, left: 20, bottom: 50),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // 임시 이미지를 표시합니다.
-          Image.network(
-            'https://picsum.photos/seed/${location['title']}/200/300',
-            width: 100,
-            height: 150,
-            fit: BoxFit.cover,
-          ),
-          const SizedBox(width: 20),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  location['title']!,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18,
-                  ),
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  location['category']!,
-                  style: const TextStyle(
-                    fontSize: 14,
-                    color: Colors.grey,
-                  ),
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  location['roadAddress']!,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(
-                    fontSize: 14,
-                  ),
-                ),
-                const Spacer(),
-                GestureDetector(
-                  onTap: () {
-                    // BottomSheet를 닫고 DetailPage로 이동합니다.
-                    Navigator.pop(context);
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) {
-                      return DetailPage();
-                    }));
-                  },
-                  child: Container(
-                    height: 50,
-                    width: double.infinity,
-                    color: Colors.transparent,
-                    alignment: Alignment.center,
-                    child: const Text(
-                      '자세히 보기',
-                      style: TextStyle(
-                          color: Colors.blueAccent,
-                          fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
       ),
     );
   }
