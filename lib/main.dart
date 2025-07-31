@@ -18,6 +18,12 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         // Scaffold의 기본 배경색을 앱 전체에 적용합니다.
         scaffoldBackgroundColor: Colors.grey[100], // 연한 회색
+        // AppBar의 테마를 설정하여 앱 전체에 일관된 스타일을 적용합니다.
+        appBarTheme: AppBarTheme(
+          backgroundColor: Colors.grey[100], // AppBar 배경색을 body와 통일
+          elevation: 0, // AppBar와 body 사이의 그림자 제거
+          foregroundColor: Colors.black, // AppBar의 아이콘과 텍스트 색상을 검은색으로 설정
+        ),
       ),
       home: const HomePage(),
     );
