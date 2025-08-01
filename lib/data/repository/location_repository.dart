@@ -13,8 +13,7 @@ class LocationRepository {
 
   LocationRepository({required Dio dio}) : _dio = dio;
 
-  Future<List<Location>> searchLocations(String query,
-      {int display = 5}) async {
+  Future<List<Location>> searchLocations(String query) async {
     const String apiUrl = 'https://openapi.naver.com/v1/search/local.json';
 
     const String clientId = '0VvHHAej5IjvGWxW5aBC';
@@ -23,7 +22,7 @@ class LocationRepository {
     try {
       final response = await _dio.get(
         apiUrl,
-        queryParameters: {'query': query, 'display': display},
+        queryParameters: {'query': query, 'display': 5},
         options: Options(
           headers: {
             'X-Naver-Client-Id': clientId,

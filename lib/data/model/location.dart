@@ -1,5 +1,8 @@
 class Location {
   final String title;
+  // Firestore 문서 ID로 사용될 고유 ID. 좌표값을 조합하여 생성합니다.
+  String get id => '$mapx-$mapy';
+
   final String category;
   final String roadAddress;
   // Firebase에 리뷰를 저장하기 위해 좌표값도 모델에 포함합니다.
