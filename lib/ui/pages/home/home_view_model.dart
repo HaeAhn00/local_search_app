@@ -37,11 +37,12 @@ class HomeViewModel extends StateNotifier<HomeState> {
 
   HomeViewModel(this._repository) : super(HomeState());
 
-  Future<void> search(String query) async {
+  Future<void> search(String query, {int display = 5}) async {
     if (query.isEmpty) return;
     state = state.copyWith(isLoading: true, errorMessage: null);
     try {
-      final locations = await _repository.searchLocations(query);
+      final locations =
+          await _repository.searchLocations(query, display: display);
       state = state.copyWith(isLoading: false, locations: locations);
     } on DioException catch (e) {
       String errorMessage = '네트워크 오류가 발생했습니다. 인터넷 연결을 확인해주세요.';
